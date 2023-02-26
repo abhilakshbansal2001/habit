@@ -1,0 +1,36 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --color-primary: #171717;
+    --color-secondary: #3662cc;
+    --color-backdrop: #323232;
+    --color-borderColor: #ffffff;
+  }
+}
+
+
+/* width */
+::-webkit-scrollbar {
+  width: 7px;
+  border-radius:40px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: transparent; 
+  
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: var(--color-backdrop); 
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555; 
+}
