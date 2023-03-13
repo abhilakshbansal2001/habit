@@ -11,15 +11,12 @@ const NavigationRoute = () => {
 				<div className='col-span-2 px-2 h-full border-r-[1px] border-r-borderColor overflow-y-auto'>
 					<Sidebar />
 				</div>
-				<div className='col-span-6 border-r-[1px] border-r-borderColor'>
-					<HabitListHeader />
-					<div className=' overflow-y-auto h-[calc(100vh-65px)]'>
+				<div className='col-span-10 border-r-[1px] border-r-borderColor  h-screen'>
 						<Outlet />
-					</div>
 				</div>
-				<div className='col-span-4 overflow-y-auto'>
+				{/* <div className='col-span-4 overflow-y-auto'>
 					<Tracker />
-				</div>
+				</div> */}
 			</div>
 		</div>
 	);

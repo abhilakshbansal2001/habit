@@ -1,7 +1,7 @@
 import React from 'react'
 import { AiFillCaretRight  } from 'react-icons/ai' 
 
-const Accordion = ({ children , value , count }) => {
+const Accordion = ({ children , text , count }) => {
 
   const [isActive , setIsActive] = React.useState(true);
 
@@ -16,10 +16,10 @@ const Accordion = ({ children , value , count }) => {
 
         <div className='text-white font-semibold text-lg capitalize gap-1 flex'>
           <span>
-            { 1 }
+            { count }
           </span>
           <span>
-            { value }
+            { text }
           </span>
         </div>
       </div>

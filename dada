@@ -1,0 +1,112 @@
+<!-- {/* Streak */}
+        <div className='border-[1px] border-borderColor col-span-2 row-span-1 flex items-center gap-4 px-3 py-5 rounded-md'>
+          <div>
+            <img src={Fire} className="h-10" />
+          </div>
+          <div className='flex items-center justify-between flex-1'>
+            <div className='flex flex-col text-white'>
+              <div className='uppercase text-[10px] text-textColorPrimary'>Current Streak</div>
+              <div className='font-bold'>2 days</div>
+            </div>
+            <div className='text-xs text-textColorPrimary bg-backdrop capitalize px-3 py-1 rounded'>
+                from feb 23, 2023
+            </div>
+          </div>
+        </div>
+
+        {/* Complete */}
+        <div className='border-[1px] border-borderColor col-span-1 px-3 py-5 rounded-md'>
+          <div className='text-textColorPrimary flex items-center gap-2'>
+            <MdDone />
+            <span className='uppercase text-xs'>Complete</span>
+          </div>
+          <div className='text-white font-bold mt-2 text-xl'>
+            {complete} Days
+          </div>
+          {complete && <div className='text-green-600 flex items-center mt-1'>
+            <BsArrowUpShort />
+            <span className='text-xs'>{complete} days</span>
+          </div>}
+        </div>
+
+        {/* Failed */}
+        <div className='border-[1px] border-borderColor col-span-1 px-3 py-5 rounded-md'>
+          <div className='text-textColorPrimary flex items-center gap-2'>
+            <RxCross2 />
+            <span className='uppercase text-xs'>Failed</span>
+          </div>
+          <div className='text-white font-bold mt-2 text-xl'>
+            {failed} Days
+          </div>
+          { failed > 0 && <div className='text-red-600 flex items-center mt-1'>
+            <BsArrowUpShort className='rotate-180' />
+            <span className='text-xs'>{failed} days</span>
+          </div>}
+        </div>
+
+        {/* Skipped */}
+        <div className='border-[1px] border-borderColor col-span-1 px-3 py-5 rounded-md'>
+          <div className='text-textColorPrimary flex items-center gap-2'>
+            <BsArrowRightShort />
+            <span className='uppercase text-xs'>Skipped</span>
+          </div>
+          <div className='text-white font-bold mt-2 text-xl'>
+            {skipped} Days
+          </div>
+          {skipped > 0 && <div className='text-yellow-600 flex items-center mt-1'>
+            <BsArrowRightShort />
+            <span className='text-xs'>{skipped} days</span>
+          </div>}
+        </div> -->
+
+
+
+
+
+
+
+        <!-- wdmjaikldna -->
+
+
+
+
+
+
+
+
+
+        <!-- import React from 'react'
+import { MdDone } from 'react-icons/md'
+
+const CompleteTile = ({ date }) => {
+
+    const [open , setOpen] = React.useState(false)
+
+    function globalListener(){
+        console.log('enfm')
+    }
+    React.useEffect(() => {
+        document.addEventListener('click',  globalListener);
+        return () => {
+            document.removeEventListener('click',  globalListener);
+        }
+    } , [])
+
+  return (
+    <div className='absolute inset-0 text-white rounded-full flex justify-center items-center ' onFocus={(e) => console.log("Z")}  onClick={e => setOpen(prev => !prev)} >
+        <div>
+            <MdDone className='absolute right-0 top-0 text-xl font-black text-green-500' />
+
+            <span className='top-1/2'>
+                {date}
+            </span>
+            {open && <div className='h-32 w-20 bg-white absolute z-10 mt-2 right-0'>
+                dada
+
+            </div>}
+        </div>
+    </div>
+  )
+}
+
+export default CompleteTile -->

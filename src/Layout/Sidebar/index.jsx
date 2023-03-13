@@ -22,7 +22,6 @@ const Sidebar = () => {
   const areas = useSelector(state => state.user?.user?.areas || [])
   const areasList = Object.values(areas)
 
-  console.log(Object.values(areas), "nknk")
 
 
 	const addProfile = (e) => {

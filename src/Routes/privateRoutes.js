@@ -7,7 +7,7 @@ const privateRoutes = [
     { path: '/habits', component: Habits },
     { path: '/time-of-day', component: TimeOfDay },
     { path: '/monthly', component: Monthly },
-    { path: '/area/:id', component: Area },
+    { path: '/area/:areaId', component: Area },
 
 ];
 

@@ -1,14 +1,30 @@
+import moment from 'moment';
 import React from 'react';
+import { Calendar } from 'react-calendar';
+import { useDispatch, useSelector } from 'react-redux';
 import DropDownButton from '../../../Components/Buttons/DropDownButton';
 import IconButton from '../../../Components/Buttons/IconButton';
 import Modal from '../../../Components/Modal';
+import { habitsOrderArray } from '../../../Helpers/constants/HabitOrder';
 import { habitListIcon } from '../../../Helpers/constants/Header';
+import { updateDate } from '../../../Redux/headerStatus';
+import { dateConstructor } from '../../../utilities/dateConstructor';
 import AddHabitModal from './addHabitModal';
-const HabitListHeader = ({ heading }) => {
+import HabitOrder from './habitOrder';
+const HabitListHeader = ({ heading  , areaId , modal  , setModal}) => {
 
 	const [calendar , setCalendar] = React.useState(false)
 	const [order , setOrder] = React.useState(false)
-	const [modal , setModal] = React.useState(false)
+	
+
+	const { date: headerDate , order: headerOrder } = useSelector(state => state.headerStatus)
+	const date = new Date(headerDate)
+
+	let calendarValue = dateConstructor(headerDate) ;
+	if(headerDate == moment(new Date()).format("YYYY-MM-DD"))
+		calendarValue = 'Today'
+
+	const dispatch = useDispatch();
 
 
 	const close = () => {
@@ -25,6 +41,13 @@ const HabitListHeader = ({ heading }) => {
 	}, [])
 
 
+	const dateChangeHandler = (value , event) => {
+		dispatch(updateDate({newDate : moment(value).format("YYYY-MM-DD")}))
+		setCalendar(false)
+	}
+
+
+	
 
 
 	return (
@@ -35,11 +58,11 @@ const HabitListHeader = ({ heading }) => {
 				}
 			>
 				<span className='text-white font-medium capitalize'>
-					{heading || 'All Habits'}
+					{heading}
 				</span>
 				<div className='ml-auto flex gap-2'>
 					<DropDownButton
-						value={'Today'}
+						value={calendarValue}
 						Icon={
 							habitListIcon['today']
 								.Icon
@@ -48,9 +71,19 @@ const HabitListHeader = ({ heading }) => {
 						setOpen={setCalendar}
 						close={close}
 						position={"left"}
-					></DropDownButton>
+					>
+						<div className='w-full bg-buttonBackground z-[100000]' onClick={e => e.stopPropagation()} >
+							<Calendar
+								className="w-full h-full bg-transparent  text-textColorPrimary border-none"
+								maxDate={new Date()}
+								tileClassName="text-textColorPrimary"
+								value={date}
+								onChange={dateChangeHandler}
+							/>
+						</div>
+					</DropDownButton>
 					<DropDownButton
-						value={'My Habits Order'}
+						value={headerOrder}
 						Icon={
 							habitListIcon['order']
 								.Icon
@@ -59,7 +92,11 @@ const HabitListHeader = ({ heading }) => {
 						setOpen={setOrder}
 						close={close}
 						position={"center"}
-					></DropDownButton>
+					>
+						<div className='w-36 bg-buttonBackground'>
+							{habitsOrderArray.map(habitOrder => <HabitOrder text={habitOrder.name} headerOrder={headerOrder} setOrder={setOrder} />)}
+						</div>	
+					</DropDownButton>
 					<IconButton
 						value={'Add Habits'}
 						Icon={habitListIcon['add'].Icon}
@@ -71,7 +108,7 @@ const HabitListHeader = ({ heading }) => {
 			</div>
 
 			{modal && <Modal onClick={() => setModal(false)}>
-				<AddHabitModal setModal={setModal} />
+				<AddHabitModal setModal={setModal} areaId={areaId} heading={heading} />
 			</Modal>}
 		</React.Fragment>
 	);

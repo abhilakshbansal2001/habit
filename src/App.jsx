@@ -3,7 +3,7 @@ import RequireAuth from './Helpers/RequiredAuth';
 import NavigationRoute from './Layout/ProtectedRouteLayout';
 import { privateRoutes } from './Routes/privateRoutes';
 import { publicRoutes } from './Routes/PublicRoutes';
-
+import 'react-calendar/dist/Calendar.css';
 function App() {
 	return (
 		<div className='app'>

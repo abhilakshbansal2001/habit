@@ -1,13 +1,12 @@
 import React from 'react'
-import Accordion from '../../../Components/Accordion'
-import HabitList from '../../../Components/HabitList'
+import { useSelector } from 'react-redux';
 import HabitListLayout from '../../../Layout/HabitListLayout';
 
 
 const Habits = () => {
 
+  const habits = Object.values(useSelector(state => state.user?.user?.habits))
   
-
   return (
     <React.Fragment>
       {/* {
@@ -25,7 +24,7 @@ const Habits = () => {
         </Accordion>
       </div> */}
 
-      <HabitListLayout />
+      <HabitListLayout habits={habits} heading={"all habits"} />
 
     </React.Fragment>
   )

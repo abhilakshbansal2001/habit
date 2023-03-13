@@ -31,15 +31,17 @@ const DropDownButton = ({ value , Icon , splColor,  open , setOpen , close , pos
         <div>
             { <Icon className="text-white" /> }
         </div>
-        <span className='text-white text-xs'>{ value }</span>
+        <span className='text-white text-xs capitalize'>{ value }</span>
 
         <div>
-          <MdArrowDropDown className='text-white text-lg' />
+          {open ? <MdArrowDropDown className='text-white text-lg rotate-180' />
+            : <MdArrowDropDown className='text-white text-lg' />
+          }
         </div>
 
       </button>
       {
-        open && <div className={`absolute w-60 shadow-lg border border-borderColor py-2 rounded bg-white mt-2 ${pos}`}>
+        open && <div className={`absolute shadow-lg  border border-borderColor rounded mt-2 ${pos}`}>
           { children }
         </div>
       }

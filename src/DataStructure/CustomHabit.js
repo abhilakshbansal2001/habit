@@ -1,17 +1,21 @@
+import moment from "moment";
 import { CustomArray } from "./CustomArray";
+import { v4 as uuidv4 } from 'uuid'
 
 export default class Habit{
-    constructor(name , timeOfDay , startDate= new Date() , description ){
+    
+    constructor(name , timeOfDay , startDate= moment(new Date()).format("DD-MM-YYYY") , description ){
         this.name = name;
+        this.id = uuidv4();
         this.timeOfDay = timeOfDay
         this.startDate = startDate
         this.description = description
-        this.prevStatus = new CustomArray()
+        this.prevStatus = new Array()
         this.prevStatus.push({
             status: 'incomplete',
-            date: this.startDate.getDate(),
-            month: this.startDate.getMonth(),
-            year: this.startDate.getFullYear(),
+            date: moment(this.startDate).get("D"),
+            month: moment(this.startDate).get("M"),
+            year: moment(this.startDate).get("Y"),
         })
     }
     getStatusForDate(date = new Date()){

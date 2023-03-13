@@ -1,15 +1,23 @@
+import moment from 'moment/moment'
 import React from 'react'
 import { RxCross2 } from 'react-icons/rx'
 import { useDispatch } from 'react-redux'
 import Habit from '../../../DataStructure/CustomHabit'
+import { INCOMPLETE } from '../../../Helpers/constants/Global'
 import { addHabit } from '../../../Redux/user'
 
-const AddHabitModal = ({ setModal }) => {
+const AddHabitModal = ({ setModal , areaId , heading }) => {
 
     const [name, setName] = React.useState("")
-    const [date, setDate] = React.useState(new Date())
-    const [timeOfDay, setTimeOfDay] = React.useState("any time")
+    const [date, setDate] = React.useState(moment().format("YYYY-MM-DD"));
+    const [timeOfDay, setTimeOfDay] = React.useState(heading === "all habits" ? "any time" :heading )
     const [description, setDescription] = React.useState("")
+
+    const nameRef = React.useRef(null)
+
+    React.useEffect(() => {
+        nameRef.current?.focus();
+    } , [])
 
     const dispatch = useDispatch();
 
@@ -17,13 +25,22 @@ const AddHabitModal = ({ setModal }) => {
         e.preventDefault()
         if(!name || !date || !timeOfDay || !description)
             return;
-        const habit = new Habit(name, timeOfDay ,date , description)
-
-        dispatch(addHabit({habit}))
+        const habit = {
+            name,
+            timeOfDay,
+            date,
+            description,
+            statuses: [],
+            areaId,
+        }
+        dispatch(addHabit({habit }))
         setModal(false);
-
-        
     }
+
+    
+    const onChangeDate = (e) => {
+        setDate(moment(new Date(e.target.value)).format("YYYY-MM-DD"));
+    };
 
   return (
     <div onClick={e => e.stopPropagation()} className='w-[90%] max-w-[450px] bg-backdrop p-3 pb-6 rounded shadow-lg'>
@@ -36,7 +53,7 @@ const AddHabitModal = ({ setModal }) => {
         <form className='mt-2' onSubmit={submitHandler}>
             <label>
                 <div className='text-[11px] text-[#7b7c7c] font-medium mb-2'>NAME</div>
-                <input type={"text"} value={name} onChange={e => setName(e.target.value)} className="bg-[#424242] outline-none px-2 text-white w-full border-borderColor py-[3px] border rounded-sm" />
+                <input ref={nameRef} type={"text"} value={name} onChange={e => setName(e.target.value)} className="bg-[#424242] outline-none px-2 text-white w-full border-borderColor py-[3px] border rounded-sm" />
             </label>
             <div className='flex gap-2 my-3'>
                 <label className='flex-1 flex flex-col'>
@@ -52,7 +69,7 @@ const AddHabitModal = ({ setModal }) => {
                 </label>
                 <label className='flex-2'>
                     <div className='text-[11px] text-[#7b7c7c] font-medium mb-2 uppercase'>start date</div>
-                    <input type="date" onChange={e => setDate(e.target.value)} className="px-2 bg-[#424242] text-white outline-none w-full border-borderColor py-[3px] border rounded-sm" />
+                    <input type="date" value={date} onChange={onChangeDate} min={moment().format("YYYY-MM-DD")} className="px-2 bg-[#424242] text-white outline-none w-full border-borderColor py-[3px] border rounded-sm" />
                 </label>
                 
             </div>
